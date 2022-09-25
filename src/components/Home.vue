@@ -19,7 +19,9 @@
     </Resume>
     </template>
     <template #movements>
-      <Movements />
+      <Movements
+        :movements="movements" 
+      />
     </template>
   </Layout>
 </template>
@@ -28,7 +30,7 @@
 import Layout from "./Layout.vue";
 import Header from "./Header.vue";
 import Resume from "./Resume/Index.vue";
-import Movements from "./Movements.vue";
+import Movements from "./Movements/Index.vue";
 export default {
   components: {
     Layout,
@@ -40,6 +42,61 @@ export default {
     return {
       amount: null,
       label: null,
+      movements: [{
+        id: 0,
+        title: "Movimiento 1",
+        description: "Esto es un gasto",
+        amount: 1000,
+      },{
+        id: 1,
+        title: "Movimiento 2",
+        description: "Esto es un gasto",
+        amount: 1000,
+      },{
+        id: 2,
+        title: "Movimiento 3",
+        description: "Esto es un gasto",
+        amount: 1000,
+      },{
+        id: 3,
+        title: "Movimiento 4",
+        description: "Esto es un gasto",
+        amount: 1000,
+      },{
+        id: 4,
+        title: "Movimiento 5",
+        description: "Esto es un gasto",
+        amount: 1000,
+      },{
+        id: 5,
+        title: "Movimiento 6",
+        description: "Esto es un gasto",
+        amount: 1000,
+      },
+      {
+        id: 6,
+        title: "Movimiento 7",
+        description: "Esto es un gasto",
+        amount: 1000,
+      }, 
+      {
+        id: 6,
+        title: "Movimiento 7",
+        description: "Esto es un gasto",
+        amount: 1000,
+      }, 
+      {
+        id: 7,
+        title: "Movimiento 8",
+        description: "Esto es un gasto",
+        amount: 1000,
+      }, 
+      {
+        id: 8,
+        title: "Movimiento 9",
+        description: "Esto es un gasto",
+        amount: 1000,
+      }],
     }
   }
 };
