@@ -2,11 +2,11 @@
   <div class="movements">
     <h2 class="title">Historial</h2>
     <div class="content">
-  <Movement
+      <Movement
         v-for="movement in movements"
         :key="movement.id"
         :title="movement.title"
-  />
+      />
     </div>
   </div>
 </template>
