@@ -51,22 +51,22 @@ export default {
         id: 1,
         title: "Movimiento 2",
         description: "Esto es un gasto",
-        amount: 1000,
+        amount: -1000,
       },{
         id: 2,
         title: "Movimiento 3",
         description: "Esto es un gasto",
-        amount: 1000,
+        amount: -1000,
       },{
         id: 3,
         title: "Movimiento 4",
         description: "Esto es un gasto",
-        amount: 1000,
+        amount: -1000,
       },{
         id: 4,
         title: "Movimiento 5",
         description: "Esto es un gasto",
-        amount: 1000,
+        amount: -1000,
       },{
         id: 5,
         title: "Movimiento 6",
