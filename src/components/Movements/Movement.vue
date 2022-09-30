@@ -55,7 +55,6 @@ const remove = () => {
     emit("remove", id.value);
 };
 
-
 </script>
 
 <style scoped>
@@ -90,9 +89,9 @@ h4 {
   margin-bottom: 16px;
 }
 .red {
-  color: red;
+    color: red;
 }
 .green {
-  color: green;
+    color: green;
 }
 </style>

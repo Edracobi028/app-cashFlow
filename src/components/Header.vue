@@ -19,25 +19,22 @@ export default{
 } 
 </script>
 
-<style>
-  header{
+<style scoped>
+  header {
     display: flex;
     justify-content: space-around;
     align-items: center;
     width: 100vw;
   }
-
   img,
-  span{
+  span {
     width: 48px;
   }
-
-  h1{
+  h1 {
     font-size: 1.4rem;
     color: var(--brand-blue);
   }
-  h1 span{
+  h1 span {
     color: var(--brand-green);
   }
-
-</style>
+  </style>

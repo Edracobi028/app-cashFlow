@@ -14,7 +14,7 @@
           graphic
         </template>
         <template #action>
-          action
+          <Action></Action>
         </template>
       </Resume>
     </template>
@@ -31,13 +31,16 @@ import Layout from "./Layout.vue";
 import Header from "./Header.vue";
 import Resume from "./Resume/Index.vue";
 import Movements from "./Movements/Index.vue";
+import Action from "./Action.vue";
+
 export default {
   components: {
     Layout,
     Header,
     Resume,
     Movements,
-  },
+    Action
+},
   data(){
     return {
       amount: null,
