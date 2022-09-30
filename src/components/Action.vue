@@ -4,7 +4,34 @@
     </button>
     <teleport to="#app">
         <Modal v-show="showModal" @close="showModal = false">
-            Aqui formulario
+            <form @submit.prevent="submit">
+                <div class="field">
+                    <label for="">Título</label>
+                    <input type="text" v-model="title" />
+                </div>
+                <div class="field">
+                    <label for="">Monto</label>
+                    <input type="number" v-model="amount" />
+                </div>
+                <div class="field">
+                    <label for="">Description</label>
+                    <textarea row="4" v-model="description" ></textarea>
+                </div>
+                <div class="field">
+                    <label class="radio-label">
+                        <input type="radio" v-model="movementType" value="Ingreso">
+                        <span>Ingreso</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" v-model="movementType" value="Gasto">
+                        <span>Gasto</span>
+                    </label>
+
+                </div>
+                <div class="action">
+                    <button>Agregar Movimiento</button>
+                </div>
+            </form>
         </Modal>
     </teleport>
 </template>
@@ -13,7 +40,16 @@
 import { ref } from 'vue';
 import Modal from './Modal.vue';
 
+//variables con valores iniciales "antes data()"
 const showModal = ref(false); //variable que abre y cierra el modal de manera dinamica con v-show
+const amount = ref(0); 
+const description = ref("");
+const movementType =  ref("Ingreso");
+
+
+const submit = () => {
+    showModal.value = !showModal.value; //falso-verdadero / verdadero-falso
+};
 </script>
 
 <style scoped>
