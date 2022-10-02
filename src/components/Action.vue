@@ -37,18 +37,28 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, defineEmits } from 'vue';
 import Modal from './Modal.vue';
 
 //variables con valores iniciales "antes data()"
 const showModal = ref(false); //variable que abre y cierra el modal de manera dinamica con v-show
+const title = ref("");
 const amount = ref(0); 
 const description = ref("");
 const movementType =  ref("Ingreso");
 
+const emit = defineEmits(["create"]); //definir evento create
 
 const submit = () => {
     showModal.value = !showModal.value; //falso-verdadero / verdadero-falso
+    //enviar el json al objeto padre
+    emit("create", {
+      title: title.value,
+      description: description.value,
+      amount: movementType.value === "Ingreso" ? amount.value : -amount.value,
+      time: new Date(),
+      id: new Date().getTime(),
+    });
 };
 </script>
 

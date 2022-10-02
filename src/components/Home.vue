@@ -14,13 +14,14 @@
           <Graphic :amounts="amounts"/>
         </template>
         <template #action>
-          <Action></Action>
+          <Action @create="create" />
         </template>
       </Resume>
     </template>
     <template #movements>
       <Movements
         :movements="movements" 
+        @remove="remove"
       />
     </template>
   </Layout>
@@ -135,6 +136,16 @@ export default {
           return suma + movement
         }, 0); 
       });
+    }
+  },
+
+  methods: {
+    create(movement){
+      this.movements.push(movement);//agregamos el movimiento
+    },
+    remove(id){
+      const index = this.movements.findIndex(m => m.id === id); //comparar si el id es el del movimiento que estamos haciendo
+      this.movements.splice(index, 1);
     }
   },
 };

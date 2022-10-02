@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import { toRefs, defineProps } from "vue";
+import { toRefs, defineProps, defineEmits } from "vue";
 import Movement from "./Movement.vue";
 
 
@@ -32,9 +32,11 @@ const props = defineProps({
 //toRefs para hacerlo reactivos los props
 const { movements } = toRefs(props);
 
+const emit = defineEmits(["remove"]); //Emit para remove
 
 const remove = (id) => {
-  console.log("remove", id);
+  emit("remove", id); //emit de remove con el elemento que quiero eliminar
+
 }
 </script>
 
