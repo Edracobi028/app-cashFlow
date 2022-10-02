@@ -47,63 +47,95 @@ export default {
     return {
       amount: null,
       label: null,
-      amounts:[100, 200, 500, 200, -400, -600, -300, 0, 300, 500 ],
       movements: [{
         id: 0,
         title: "Movimiento 1",
         description: "Esto es un gasto",
-        amount: 1000,
+        amount: 100,
+        time: new Date("10-02-2022"),
       },{
         id: 1,
         title: "Movimiento 2",
         description: "Esto es un gasto",
-        amount: -1000,
+        amount: 200,
+        time: new Date("10-02-2022"),
       },{
         id: 2,
         title: "Movimiento 3",
         description: "Esto es un gasto",
-        amount: -1000,
+        amount: 500,
+        time: new Date("10-02-2022"),
       },{
         id: 3,
         title: "Movimiento 4",
         description: "Esto es un gasto",
-        amount: -1000,
+        amount: 200,
+        time: new Date("10-02-2022"),
       },{
         id: 4,
         title: "Movimiento 5",
         description: "Esto es un gasto",
-        amount: -1000,
+        amount: -400,
+        time: new Date("10-02-2022"),
       },{
         id: 5,
         title: "Movimiento 6",
         description: "Esto es un gasto",
-        amount: 1000,
+        amount: -600,
+        time: new Date("10-02-2022"),
       },
       {
         id: 6,
         title: "Movimiento 7",
         description: "Esto es un gasto",
-        amount: 1000,
-      }, 
-      {
-        id: 6,
-        title: "Movimiento 7",
-        description: "Esto es un gasto",
-        amount: 1000,
+        amount: -300,
+        time: new Date("10-02-2022"),
       }, 
       {
         id: 7,
         title: "Movimiento 8",
         description: "Esto es un gasto",
-        amount: 1000,
+        amount: 100,
+        time: new Date("10-02-2022"),
       }, 
       {
         id: 8,
         title: "Movimiento 9",
         description: "Esto es un gasto",
-        amount: 1000,
+        amount: 300,
+        time: new Date("09-02-2022"),
+      }, 
+      {
+        id: 9,
+        title: "Movimiento 10",
+        description: "Esto es un gasto",
+        amount: 500,
+        time: new Date("09-02-2022"),
       }],
     }
-  }
+  },
+  computed: {
+    amounts(){
+      const lastDays =  this.movements
+      //Obtener ultimos 30 dias
+      .filter(m => {
+        const today = new Date();//Dia de hoy
+        const oldDate = today.setDate(today.getDate() - 30); //establecer una fecha apartir de hoy
+        return m.time > oldDate; //Comparamos si es verdadero o falso
+      })
+      //obtiene el elemento m que es el movements
+      .map(m => m.amount); //lista de todos los montos en especifico
+      
+      //tomar cada una de las fechas y sumarle los movimientos anteriores
+      return lastDays.map((m, i) => {
+        const lastMovements = lastDays.slice(0, i); //Por cada movimiento obtener toda la lista de movimientos anteriores a este
+        //retornar toda la sumatoria de los ultimos movimientos
+
+        return lastMovements.reduce((suma, movement) => {
+          return suma + movement
+        }, 0); 
+      });
+    }
+  },
 };
 </script>

@@ -31,13 +31,12 @@
             />
         </svg>   
         <p>Últimos 30 días</p>
-        <div>{{ zero}}</div>
     </div>
 </template>
 
 <script setup>
      //Importamos props, toRefs, computed para recibir los montos y transformar en pixeles
-     import { ref, defineProps, toRefs, computed } from 'vue';
+     import { ref, defineProps, defineEmits ,toRefs, computed } from 'vue';
 
      //Definimos props
      const props = defineProps({
@@ -82,6 +81,8 @@
 
     const pointer = ref(0); //Crear Variable que tenga esa coordenada e inicializarla en cero
 
+    const emit = defineEmits(["select"]); //Definir un evento llamado select
+
      //Funcion que recibe un evento
      const tap = ({ target, touches }) => {
         showPointer.value = true; //Aparecer el cursor
@@ -89,6 +90,7 @@
         const elementX = target.getBoundingClientRect().x; //Obtener cual es la coordenada x donde inicia
         const touchX = touches[0].clientX; //la coordenada donde hice touch
         pointer.value = ((touchX - elementX) * 300) / elementWidth ;//Transformarlo auna escala
+        emit("select", amounts)
     }
 
      const untap = () => {
