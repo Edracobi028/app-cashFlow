@@ -1,6 +1,11 @@
 <template>
     <div>
-        <svg viewBox="0 0 300 200">
+        <svg 
+            @touchstart="tap" 
+            @touchmove="tap"
+            @touchend="untap"
+            viewBox="0 0 300 200">
+
             <line
             stroke="#c4c4c4"
             stroke-width="2" 
@@ -16,11 +21,12 @@
             :points="points"
             />
             <line
+            v-show="showPointer"
             stroke="#04b500"
             stroke-width="2"
-            x1="200"
+            :x1="pointer"
             y1="0"
-            x2="200"
+            :x2="pointer"
             y2="200"
             />
         </svg>   
@@ -31,7 +37,7 @@
 
 <script setup>
      //Importamos props, toRefs, computed para recibir los montos y transformar en pixeles
-     import { defineProps, toRefs, computed } from 'vue';
+     import { ref, defineProps, toRefs, computed } from 'vue';
 
      //Definimos props
      const props = defineProps({
@@ -68,10 +74,26 @@
         return amounts.value.reduce((points, amount, i) => {
             const x = (300 / total) * (i + 1);
             const y = amountToPixels(amount);
-            console.log(y);
             return `${points} ${x}, ${y}`;
         }, "0, 100");
      });
+
+    const showPointer = ref(false); //Crea rvariable dinamica e iniciarla en falso
+
+    const pointer = ref(0); //Crear Variable que tenga esa coordenada e inicializarla en cero
+
+     //Funcion que recibe un evento
+     const tap = ({ target, touches }) => {
+        showPointer.value = true; //Aparecer el cursor
+        const elementWidth = target.getBoundingClientRect().width;  //obtener el tamaño del svg segun el componente donde esta 
+        const elementX = target.getBoundingClientRect().x; //Obtener cual es la coordenada x donde inicia
+        const touchX = touches[0].clientX; //la coordenada donde hice touch
+        pointer.value = ((touchX - elementX) * 300) / elementWidth ;//Transformarlo auna escala
+    }
+
+     const untap = () => {
+        showPointer.value = false; //Desaparecer el cursor
+     }
 
 </script>
 
