@@ -36,7 +36,7 @@
 
 <script setup>
      //Importamos props, toRefs, computed para recibir los montos y transformar en pixeles
-     import { ref, defineProps, defineEmits ,toRefs, computed } from 'vue';
+     import { ref, defineProps, defineEmits ,toRefs, computed, watch } from 'vue';
 
      //Definimos props
      const props = defineProps({
@@ -74,28 +74,34 @@
             const x = (300 / total) * (i + 1);
             const y = amountToPixels(amount);
             return `${points} ${x}, ${y}`;
-        }, "0, 100");
+        }, `0, ${amountToPixels(amounts.value.length ? amounts.value[0] : 0)}`);
      });
 
-    const showPointer = ref(false); //Crea rvariable dinamica e iniciarla en falso
+    const showPointer = ref(false);         //Crea rvariable dinamica e iniciarla en falso
+    const pointer = ref(0);                 //Crear Variable que tenga esa coordenada e inicializarla en cero
+    const emit = defineEmits(["select"]);   //Definir un evento llamado select
 
-    const pointer = ref(0); //Crear Variable que tenga esa coordenada e inicializarla en cero
-
-    const emit = defineEmits(["select"]); //Definir un evento llamado select
+    watch(pointer, (value) => {
+        const index = Math.ceil((value / (300 / amounts.value.length)));    //Dividir en pedazos iguales la grafica y redondear con "ceil"
+        if (index < 0 || index > amounts.value.length) return;             //descartar fuera de rango
+        emit("select", amounts.value[index - 1]);                           //tomo el valor del index
+    });
 
      //Funcion que recibe un evento
      const tap = ({ target, touches }) => {
-        showPointer.value = true; //Aparecer el cursor
+        showPointer.value = true;                                   //Aparecer el cursor
         const elementWidth = target.getBoundingClientRect().width;  //obtener el tamaño del svg segun el componente donde esta 
-        const elementX = target.getBoundingClientRect().x; //Obtener cual es la coordenada x donde inicia
-        const touchX = touches[0].clientX; //la coordenada donde hice touch
+        const elementX = target.getBoundingClientRect().x;          //Obtener cual es la coordenada x donde inicia
+        const touchX = touches[0].clientX;                          //la coordenada donde hice touch
         pointer.value = ((touchX - elementX) * 300) / elementWidth ;//Transformarlo auna escala
-        emit("select", amounts)
     }
 
-     const untap = () => {
+    //Detectar
+    //Redondear
+
+    const untap = () => {
         showPointer.value = false; //Desaparecer el cursor
-     }
+    }
 
 </script>
 
