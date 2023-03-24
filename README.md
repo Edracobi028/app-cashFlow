@@ -1,4 +1,4 @@
-# cashflow
+# Cashflow
 App para control de gastos con memoria interna
 
 ![image](https://user-images.githubusercontent.com/62727846/227449579-f9005334-230c-4300-977b-3ece0cfa72b1.png)
