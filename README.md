@@ -2,6 +2,8 @@
 App para control de gastos con memoria interna
 
 ![image](https://user-images.githubusercontent.com/62727846/227449212-5bc04bfc-41e7-4c5d-8a68-a40f8a964748.png)
+![image](https://user-images.githubusercontent.com/62727846/227449459-c0e563e3-049e-4c97-b124-6bbf91377801.png)
+
 
 ## Project setup
 ```
